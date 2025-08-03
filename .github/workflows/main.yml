@@ -1,0 +1,44 @@
+name: Build and Deploy to ECS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: your-region
+         - name: Deploy static site to S3 bucket
+        run: aws s3 sync . s3://myriderapp1 --delete
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and push admin-service image
+        run: |
+          docker build -t admin-service ./packages/admin-service
+          docker tag admin-service:latest ${{ secrets.ECR_REGISTRY }}/admin-service:latest
+          docker push ${{ secrets.ECR_REGISTRY }}/admin-service:latest
+
+      - name: Build and push auth-service image
+        run: |
+          docker build -t auth-service ./packages/auth-service
+          docker tag auth-service:latest ${{ secrets.ECR_REGISTRY }}/auth-service:latest
+          docker push ${{ secrets.ECR_REGISTRY }}/auth-service:latest
+
+      - name: Build and push api-gateway image
+        run: |
+          docker build -t api-gateway ./packages/api-gateway
+          docker tag api-gateway:latest ${{ secrets.ECR_REGISTRY }}/api-gateway:latest
+          docker push ${{ secrets.ECR_REGISTRY }}/api-gateway:latest
+
+      # Add ECS deployment step here if you want to automate full deployment
