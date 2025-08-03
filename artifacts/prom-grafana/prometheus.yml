@@ -1,0 +1,43 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'user-service'
+    static_configs:
+      - targets: ['3.6.44.110:3000']
+
+  - job_name: 'driver-transporter-service'
+    static_configs:
+      - targets: ['3.6.44.110:3001']
+
+  - job_name: 'payment-service'
+    static_configs:
+      - targets: ['3.6.44.110:3002']
+
+  - job_name: 'notification-service'
+    static_configs:
+      - targets: ['3.6.44.110:3003']
+
+  - job_name: 'review-rating-service'
+    static_configs:
+      - targets: ['3.6.44.110:3004']
+
+  - job_name: 'chat-service'
+    static_configs:
+      - targets: ['3.6.44.110:3005']
+
+  - job_name: 'vehicle-listing-service'
+    static_configs:
+      - targets: ['3.6.44.110:3006']
+
+  - job_name: 'admin-service'
+    static_configs:
+      - targets: ['3.6.44.110:3007']
+
+  - job_name: 'auth-service'
+    static_configs:
+      - targets: ['3.6.44.110:3008']
+
+  - job_name: 'api-gateway'
+    static_configs:
+      - targets: ['3.6.44.110:3009']

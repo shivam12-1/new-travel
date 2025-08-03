@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  admin-service:
+    build:
+      context: ./packages/admin-service
+    container_name: admin-service
+    env_file:
+      - ./packages/admin-service/.env
+    ports:
+      - "3007:3007"
+  auth-service:
+    build:
+      context: ./packages/auth-service
+    container_name: auth-service
+    env_file:
+      - ./packages/auth-service/.env
+    ports:
+      - "3006:3006"
+
+  api-gateway:
+    build:
+      context: ./packages/api-gateway
+    container_name: api-gateway
+    env_file:
+      - ./packages/api-gateway/.env
+    ports:
+      - "3009:3009"
+    depends_on:
+      - admin-service

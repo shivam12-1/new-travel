@@ -1,0 +1,31 @@
+# Node modules (we install fresh inside Docker)
+node_modules
+npm-debug.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# IDE/editor configs
+.vscode
+.idea
+*.swp
+
+# Tests and coverage
+coverage
+__tests__
+*.test.js
+
+# Docker stuff
+Dockerfile
+docker-compose.yml
+.dockerignore

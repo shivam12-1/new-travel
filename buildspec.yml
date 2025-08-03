@@ -1,0 +1,58 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_ACCOUNT_ID: "006543401784"
+    AWS_DEFAULT_REGION: "ap-south-1"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Installing dependencies..."
+      - npm install --workspaces --legacy-peer-deps
+      - echo "Logging in to Amazon ECR..."
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+
+  pre_build:
+    commands:
+      - echo "Determining changed services..."
+      - |
+        CHANGED=$(git diff --name-only HEAD~1 HEAD)
+        SERVICES_TO_BUILD=""
+        for d in packages/*/ ; do
+          NAME=$(basename "$d")
+          if echo "$CHANGED" | grep "packages/$NAME/" > /dev/null; then
+            echo "$NAME changed"
+            if [ -z "$SERVICES_TO_BUILD" ]; then
+              SERVICES_TO_BUILD="$NAME"
+            else
+              SERVICES_TO_BUILD="$SERVICES_TO_BUILD $NAME"
+            fi
+          fi
+        done
+        if [ -z "$SERVICES_TO_BUILD" ]; then
+          echo "No services changed. Exiting."
+          exit 0
+        fi
+        echo "$SERVICES_TO_BUILD" | tr ' ' '\n' > services.txt
+
+  build:
+    commands:
+      - |
+        if [ ! -f services.txt ]; then
+          echo "No services to build."
+          exit 0
+        fi
+        while IFS= read -r SERVICE; do
+          ECR_SERVICE_NAME="rwd_${SERVICE}"
+          IMAGE_NAME="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_SERVICE_NAME"
+          echo "Building and pushing $IMAGE_NAME"
+          docker build -t "$IMAGE_NAME" "./packages/$SERVICE"
+          docker push "$IMAGE_NAME"
+        done < services.txt
+
+artifacts:
+  files:
+    - '**/*'

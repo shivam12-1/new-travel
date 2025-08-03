@@ -1,0 +1,52 @@
+# Root node_modules
+/node_modules/
+
+# All workspace node_modules
+**/node_modules/
+
+.turbo
+# Build outputs
+dist/
+**/dist/
+build/
+**/build/
+
+# Logs
+*.log
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Local dev files
+*.local
+*.DS_Store
+*.swp
+
+# IDEs
+.vscode/
+.idea/
+
+# Turbo cache
+turbo/
+.cache/
+
+# Coverage reports
+coverage/
+**/coverage/
+
+# Docker
+packages/notification-service/firebase.json
+ridewithdriver-secret.json
+
+# Optional OS/Editor junk
+Thumbs.db
+.DS_Store
+

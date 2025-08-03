@@ -1,0 +1,3314 @@
+{
+	"info": {
+		"_postman_id": "ridewithdriver-api-collection",
+		"name": "RideWithDriver API Collection",
+		"description": "Complete API collection for RideWithDriver backend services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "ridewithdriver"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Send OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"number\": \"9876543210\",\n  \"language\": \"en\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/session/send-otp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"session",
+								"send-otp"
+							]
+						}
+					}
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"number\": \"9876543210\",\n  \"otp\": \"1212\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/session/verify-otp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"session",
+								"verify-otp"
+							]
+						}
+					}
+				},
+				{
+					"name": "Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/session/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"session",
+								"login"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Legal Documents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/session/legal?TYPE=PRIVACY_POLICY&LANG=en",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"session",
+								"legal"
+							],
+							"query": [
+								{
+									"key": "TYPE",
+									"value": "PRIVACY_POLICY",
+									"description": "Available types: PRIVACY_POLICY, TERMS_AND_CONDITIONS, LEGAL_DISCLAIMER, DRIVER_AGREEMENT, TRANSPORTER_AGREEMENT, E_RICKSHAW_AGREEMENT, RICKSHAW_AGREEMENT, ABOUT_US, FAQ_POLICY, FAQ"
+								},
+								{
+									"key": "LANG",
+									"value": "en",
+									"description": "Language code (required)"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Support",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/session/support",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"session",
+								"support"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Get Application Secrets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/secrets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"secrets"
+							]
+						}
+					}
+				},
+				{
+					"name": "Home Dashboard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"latitude\": 28.6139,\n  \"longitude\": 77.2090\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/home",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"home"
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Services",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"latitude\": 28.6139,\n  \"longitude\": 77.2090,\n  \"category\": \"driver\",\n  \"radius\": 10\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/search",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"search"
+							]
+						}
+					}
+				},
+				{
+					"name": "Filter Services",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/filter?category=driver&minPrice=100&maxPrice=1000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "driver"
+								},
+								{
+									"key": "minPrice",
+									"value": "100"
+								},
+								{
+									"key": "maxPrice",
+									"value": "1000"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get My Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"language\": \"English\",\n  \"image\": \"https://example.com/profile-updated.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Location",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"latitude\": 28.6139,\n  \"longitude\": 77.2090,\n  \"address\": \"New Delhi, India\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/location",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"location"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Notifications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/my-notification",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"my-notification"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Support",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/support",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"support"
+							]
+						}
+					}
+				},
+				{
+					"name": "Log Activity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"action\": \"search\",\n  \"details\": \"Searched for drivers\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/activity",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"activity"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Single Service",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/single/{{service_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"single",
+								"{{service_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get State and City",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/state-city",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"state-city"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get City State by Pincode",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/pincode/{{pincode}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"pincode",
+								"{{pincode}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Upload Media",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "type",
+									"value": "image",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/user/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"upload"
+							]
+						}
+					}
+				},
+				{
+					"name": "Validate Photo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/user/validate-photo",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"validate-photo"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/delete-account",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"delete-account"
+							]
+						}
+					}
+				},
+				{
+					"name": "Set Account Preferences",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"notifications\": true,\n  \"location_sharing\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/pref-account",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"pref-account"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Account Preferences",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/pref-account",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"pref-account"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Driver & Transporter Registration",
+			"item": [
+				{
+					"name": "Become Driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profilePhoto\": \"https://example.com/profile.jpg\",\n  \"fullName\": \"John Driver\",\n  \"mobileNumber\": \"9876543210\",\n  \"dob\": \"1990-01-01\",\n  \"gender\": \"Male\",\n  \"bio\": \"Experienced driver with 5 years of experience\",\n  \"address\": {\n    \"addressLine\": \"123 Main Street, New Delhi\",\n    \"pincode\": 110001,\n    \"city\": \"New Delhi\",\n    \"state\": \"Delhi\"\n  },\n  \"experience\": 5,\n  \"minimumCharges\": 500,\n  \"negotiable\": true,\n  \"aadharCardNumber\": \"123456789012\",\n  \"aadharCardPhoto\": \"https://example.com/aadhar-front.jpg\",\n  \"aadharCardPhotoBack\": \"https://example.com/aadhar-back.jpg\",\n  \"drivingLicenceNumber\": \"DL1420110012345\",\n  \"drivingLicencePhoto\": \"https://example.com/dl.jpg\",\n  \"vehicleType\": [\"Car upto 5 seat\", \"SUV upto 7 seat\"],\n  \"serviceLocation\": {\n    \"lat\": 28.6139,\n    \"lng\": 77.2090\n  },\n  \"languageSpoken\": [\"Hindi\", \"English\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/become-driver",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"become-driver"
+							]
+						}
+					}
+				},
+				{
+					"name": "Become Transporter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profilePhoto\": \"https://example.com/transporter-profile.jpg\",\n  \"gstin\": \"22AAAAA0000A1Z5\",\n  \"companyName\": \"ABC Transport Company\",\n  \"address\": {\n    \"addressLine\": \"123 Industrial Area, Transport Nagar\",\n    \"pincode\": 110001,\n    \"city\": \"New Delhi\",\n    \"state\": \"Delhi\"\n  },\n  \"phoneNumber\": \"9876543210\",\n  \"contactPersonName\": \"John Manager\",\n  \"bio\": \"Leading transport company with modern fleet\",\n  \"transportationPermit\": \"https://example.com/permit.jpg\",\n  \"fleetSize\": \"medium\",\n  \"counts\": {\n    \"car\": 5,\n    \"bus\": 3,\n    \"van\": 2\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/become-transporter",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"become-transporter"
+							]
+						}
+					}
+				},
+				{
+					"name": "Become Transporter Rickshaw",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profilePhoto\": \"https://example.com/rickshaw-driver.jpg\",\n  \"details\": {\n    \"fullName\": \"Ram Kumar\",\n    \"mobileNumber\": \"9876543210\",\n    \"bio\": \"Experienced rickshaw driver serving the city for 10 years\",\n    \"address\": {\n      \"addressLine\": \"Lane 5, Rickshaw Stand, Market Area\",\n      \"pincode\": 110001,\n      \"city\": \"New Delhi\",\n      \"state\": \"Delhi\"\n    },\n    \"languageSpoken\": [\"Hindi\", \"English\", \"Punjabi\"]\n  },\n  \"aadharCardNumber\": \"123456789012\",\n  \"aadharCardPhoto\": \"https://example.com/aadhar-front.jpg\",\n  \"aadharCardPhotoBack\": \"https://example.com/aadhar-back.jpg\",\n  \"driverLicenseNumber\": \"DL1420110012345\",\n  \"driverLicensePhoto\": \"https://example.com/dl.jpg\",\n  \"vehicleNumber\": \"DL32AB1234\",\n  \"seatingCapacity\": 3,\n  \"vehicleImages\": [\n    \"https://example.com/rickshaw1.jpg\",\n    \"https://example.com/rickshaw2.jpg\"\n  ],\n  \"vehicleVideo\": \"https://example.com/rickshaw-video.mp4\",\n  \"minimumChargePerHour\": 50,\n  \"isPriceNegotiable\": true,\n  \"serviceLocation\": {\n    \"lat\": 28.6139,\n    \"lng\": 77.2090\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/become-transporter-rickshaw",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"become-transporter-rickshaw"
+							]
+						}
+					}
+				},
+				{
+					"name": "Become Transporter E-Rickshaw",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profilePhoto\": \"https://example.com/e-rickshaw-driver.jpg\",\n  \"details\": {\n    \"fullName\": \"Suresh Kumar\",\n    \"mobileNumber\": \"9876543210\",\n    \"bio\": \"Eco-friendly e-rickshaw driver providing clean transportation\",\n    \"address\": {\n      \"addressLine\": \"E-Rickshaw Stand, Green Colony\",\n      \"pincode\": 110001,\n      \"city\": \"New Delhi\",\n      \"state\": \"Delhi\"\n    },\n    \"languageSpoken\": [\"Hindi\", \"English\"]\n  },\n  \"aadharCardNumber\": \"123456789012\",\n  \"aadharCardPhoto\": \"https://example.com/aadhar-front.jpg\",\n  \"aadharCardPhotoBack\": \"https://example.com/aadhar-back.jpg\",\n  \"vehicleNumber\": \"DL32ER1234\",\n  \"seatingCapacity\": 4,\n  \"vehicleImages\": [\n    \"https://example.com/e-rickshaw1.jpg\",\n    \"https://example.com/e-rickshaw2.jpg\"\n  ],\n  \"vehicleVideo\": \"https://example.com/e-rickshaw-video.mp4\",\n  \"minimumChargePerHour\": 40,\n  \"isPriceNegotiable\": true,\n  \"serviceLocation\": {\n    \"lat\": 28.6139,\n    \"lng\": 77.2090\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/become-transporter-e-rickshaw",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"become-transporter-e-rickshaw"
+							]
+						}
+					}
+				},
+				{
+					"name": "Become Independent Car Owner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"photo\": \"https://example.com/car-owner.jpg\",\n  \"name\": \"Rajesh Sharma\",\n  \"phoneNumber\": \"9876543210\",\n  \"about\": \"Independent car owner providing premium transportation services\",\n  \"address\": {\n    \"addressLine\": \"B-123, Sector 15, Noida\",\n    \"pincode\": 201301,\n    \"city\": \"Noida\",\n    \"state\": \"Uttar Pradesh\"\n  },\n  \"documents\": {\n    \"aadharCardNumber\": \"123456789012\",\n    \"aadharCardPhotoFront\": \"https://example.com/aadhar-front.jpg\",\n    \"aadharCardPhotoBack\": \"https://example.com/aadhar-back.jpg\",\n    \"drivingLicenseNumber\": \"UP1420110012345\",\n    \"drivingLicensePhoto\": \"https://example.com/dl.jpg\",\n    \"transportationPermitPhoto\": \"https://example.com/permit.jpg\"\n  },\n  \"fleetSize\": {\n    \"cars\": 2,\n    \"minivans\": 0\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/become-independent-car-owner",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"become-independent-car-owner"
+							]
+						}
+					}
+				},
+				{
+					"name": "Complete Verification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"TYPE\": \"AADHAR\",\n  \"aadhaar_number\": \"123456789012\",\n  \"name\": \"John Doe\"\n}",
+							"options": {
+								"raw": {
+									"description": "TYPE options: AADHAR (needs aadhaar_number), DRIVING_LICENSE (needs dl_number, dob), AADHAR_IMAGE (needs image), DRIVING_LICENSE_IMAGE (needs image), GST (needs gst_number)"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/verify",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"verify"
+							]
+						}
+					}
+				},
+				{
+					"name": "Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/register/home-",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"home-"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/register/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"profile"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Driver Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"Updated Driver Name\",\n  \"mobileNumber\": \"9876543210\",\n  \"profilePhoto\": \"https://example.com/updated-profile.jpg\",\n  \"bio\": \"Updated bio with more experience details\",\n  \"address\": {\n    \"addressLine\": \"456 Updated Street, Delhi\",\n    \"pincode\": 110002,\n    \"city\": \"New Delhi\",\n    \"state\": \"Delhi\"\n  },\n  \"experience\": 7,\n  \"minimumCharges\": 600,\n  \"vehicleType\": [\"Car upto 5 seat\", \"SUV upto 7 seat\", \"Minivan upto 9 seat\"],\n  \"servicesCities\": [\"Delhi\", \"Gurugram\", \"Noida\"],\n  \"languageSpoken\": [\"Hindi\", \"English\", \"Punjabi\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/profile?TYPE=DRIVER",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "TYPE",
+									"value": "DRIVER"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Transporter Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"photo\": \"https://example.com/updated-transporter.jpg\",\n  \"companyName\": \"Updated Transport Company Pvt Ltd\",\n  \"address\": {\n    \"addressLine\": \"789 Transport Hub, Industrial Area\",\n    \"pincode\": 110003,\n    \"city\": \"New Delhi\",\n    \"state\": \"Delhi\"\n  },\n  \"phoneNumber\": \"9876543211\",\n  \"contactPersonName\": \"Updated Manager Name\",\n  \"bio\": \"Updated company description with expanded services\",\n  \"fleetSize\": \"large\",\n  \"counts\": {\n    \"car\": 8,\n    \"bus\": 5,\n    \"van\": 4\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/profile?TYPE=TRANSPORTER",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "TYPE",
+									"value": "TRANSPORTER"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Rickshaw Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"images\": [\n    \"https://example.com/updated-rickshaw1.jpg\",\n    \"https://example.com/updated-rickshaw2.jpg\"\n  ],\n  \"videos\": \"https://example.com/updated-rickshaw-video.mp4\",\n  \"minimumChargePerHour\": 60,\n  \"isPriceNegotiable\": false,\n  \"servedLocation\": {\n    \"lat\": 28.6139,\n    \"lng\": 77.2090\n  },\n  \"fullName\": \"Updated Rickshaw Driver\",\n  \"mobileNumber\": \"9876543212\",\n  \"profilePhoto\": \"https://example.com/updated-rickshaw-driver.jpg\",\n  \"bio\": \"Updated bio with more service areas\",\n  \"address\": {\n    \"addressLine\": \"Updated Rickshaw Stand, Market Complex\",\n    \"pincode\": 110004,\n    \"city\": \"New Delhi\",\n    \"state\": \"Delhi\"\n  },\n  \"languageSpoken\": [\"Hindi\", \"English\", \"Urdu\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/profile?TYPE=RICKSHAW",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "TYPE",
+									"value": "RICKSHAW"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update E-Rickshaw Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"images\": [\n    \"https://example.com/updated-e-rickshaw1.jpg\",\n    \"https://example.com/updated-e-rickshaw2.jpg\"\n  ],\n  \"videos\": \"https://example.com/updated-e-rickshaw-video.mp4\",\n  \"minimumChargePerHour\": 45,\n  \"isPriceNegotiable\": true,\n  \"servedLocation\": {\n    \"lat\": 28.6139,\n    \"lng\": 77.2090\n  },\n  \"fullName\": \"Updated E-Rickshaw Driver\",\n  \"mobileNumber\": \"9876543213\",\n  \"profilePhoto\": \"https://example.com/updated-e-rickshaw-driver.jpg\",\n  \"bio\": \"Updated eco-friendly transportation service\",\n  \"address\": {\n    \"addressLine\": \"Updated E-Rickshaw Stand, Green Area\",\n    \"pincode\": 110005,\n    \"city\": \"New Delhi\",\n    \"state\": \"Delhi\"\n  },\n  \"languageSpoken\": [\"Hindi\", \"English\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/profile?TYPE=E_RICKSHAW",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "TYPE",
+									"value": "E_RICKSHAW"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Independent Car Owner Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Car Owner Name\",\n  \"phoneNumber\": \"9876543214\",\n  \"photo\": \"https://example.com/updated-car-owner.jpg\",\n  \"about\": \"Updated premium car rental services with expanded fleet\",\n  \"address\": {\n    \"addressLine\": \"C-456, Updated Sector, Premium Colony\",\n    \"pincode\": 201302,\n    \"city\": \"Noida\",\n    \"state\": \"Uttar Pradesh\"\n  },\n  \"fleetSize\": {\n    \"cars\": 1,\n    \"minivans\": 1\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/profile?TYPE=INDEPENDENT_CAR_OWNER",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"profile"
+							],
+							"query": [
+								{
+									"key": "TYPE",
+									"value": "INDEPENDENT_CAR_OWNER"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/register/subscriptions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"subscriptions"
+							]
+						}
+					}
+				},
+				{
+					"name": "Verify Endpoint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"verification_code\": \"VER123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register/verify",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"verify"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Registration Plans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/register/registration-plans/{{category}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"registration-plans",
+								"{{category}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Check Registration Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/register/registration-status/{{category}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"registration-status",
+								"{{category}}"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Chat Service",
+			"item": [
+				{
+					"name": "Create or Get Conversation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cause\": \"DRIVER\",\n  \"id\": \"{{recipient_id}}\"\n}",
+							"options": {
+								"raw": {
+									"description": "Available cause values: DRIVER, TRANSPORTER, RICKSHAW, E_RICKSHAW, INDEPENDENT_CAR_OWNER"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/chat/conversations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"chat",
+								"conversations"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get My Chat List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/chat/conversations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"chat",
+								"conversations"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Chat Messages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/chat/conversations/{{conversation_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"chat",
+								"conversations",
+								"{{conversation_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Chat",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/chat/conversations/{{conversation_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"chat",
+								"conversations",
+								"{{conversation_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Translate Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"chatId\": \"{{chat_id}}\",\n  \"messageId\": \"{{message_id}}\",\n  \"targetLanguage\": \"es\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/chat/translate-message",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"chat",
+								"translate-message"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Payment Service",
+			"item": [
+				{
+					"name": "Get Plans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/payment/plans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"payment",
+								"plans"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"planId\": \"{{plan_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/payment/create-order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"payment",
+								"create-order"
+							]
+						}
+					}
+				},
+				{
+					"name": "Save Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"razorpay_order_id\": \"order_xyz123\",\n  \"razorpay_payment_id\": \"pay_xyz123\",\n  \"razorpay_signature\": \"signature_xyz123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/payment/save-order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"payment",
+								"save-order"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Registration Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category\": \"DRIVER\",\n  \"amount\": 500\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/payment/create-registration-order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"payment",
+								"create-registration-order"
+							]
+						}
+					}
+				},
+				{
+					"name": "Save Registration Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"razorpay_order_id\": \"order_xyz123\",\n  \"razorpay_payment_id\": \"pay_xyz123\",\n  \"razorpay_signature\": \"signature_xyz123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/payment/save-registration-order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"payment",
+								"save-registration-order"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Payment Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/payment/status/{{category}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"payment",
+								"status",
+								"{{category}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Razorpay Webhook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event\": \"payment.captured\",\n  \"payload\": {}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/payment/webhook",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"payment",
+								"webhook"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Rating & Review",
+			"item": [
+				{
+					"name": "Get Reviews and Ratings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/rtr/review-rating?target_id={{target_id}}&target_type=driver",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"rtr",
+								"review-rating"
+							],
+							"query": [
+								{
+									"key": "target_id",
+									"value": "{{target_id}}"
+								},
+								{
+									"key": "target_type",
+									"value": "driver"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Add Review and Rating",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{target_id}}\",\n  \"service\": \"DRIVER\",\n  \"rating\": 5,\n  \"review\": \"Excellent service!\"\n}",
+							"options": {
+								"raw": {
+									"description": "service field accepts: DRIVER, TRANSPORTER, RICKSHAW, E_RICKSHAW, INDEPENDENT_CAR_OWNER"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/rtr/review-rating",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"rtr",
+								"review-rating"
+							]
+						}
+					}
+				},
+				{
+					"name": "Edit Review and Rating",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"rating\": 4,\n  \"review\": \"Good service, but could be better\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/rtr/review-rating/{{review_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"rtr",
+								"review-rating",
+								"{{review_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Review and Rating",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/rtr/review-rating/{{review_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"rtr",
+								"review-rating",
+								"{{review_id}}"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Vehicle Listing",
+			"item": [
+				{
+					"name": "Get All Vehicles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/vehicle/vehicle",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"vehicle",
+								"vehicle"
+							]
+						}
+					}
+				},
+				{
+					"name": "Add Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vehicleType\": \"Car upto 5 seat\",\n  \"vehicleName\": \"Honda City\",\n  \"vehicleNumber\": \"DL01AB1234\",\n  \"seatingCapacity\": 5,\n  \"airConditioning\": \"AC\",\n  \"serviceLocation\": {\n    \"lat\": 28.6139,\n    \"lng\": 77.2090\n  },\n  \"minimumCharges\": 500,\n  \"isPriceNegotiable\": true,\n  \"vehicleImages\": [\n    \"https://example.com/car1.jpg\",\n    \"https://example.com/car2.jpg\",\n    \"https://example.com/car3.jpg\"\n  ],\n  \"vehicleVideo\": \"https://example.com/car-video.mp4\",\n  \"rcBookFrontPhoto\": \"https://example.com/rc-front.jpg\",\n  \"rcBookBackPhoto\": \"https://example.com/rc-back.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/vehicle/add-vehicle",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"vehicle",
+								"add-vehicle"
+							]
+						}
+					}
+				},
+				{
+					"name": "Edit Vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vehicle_type\": \"car\",\n  \"make\": \"Honda\",\n  \"model\": \"City\",\n  \"year\": 2021,\n  \"color\": \"Black\",\n  \"seating_capacity\": 5\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/vehicle/edit-vehicle/{{vehicle_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"vehicle",
+								"edit-vehicle",
+								"{{vehicle_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Vehicle",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/vehicle/delete-vehicle/{{vehicle_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"vehicle",
+								"delete-vehicle",
+								"{{vehicle_id}}"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Notification Service",
+			"item": [
+				{
+					"name": "Get Notifications",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"page\": 1,\n  \"limit\": 10\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/notification/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"notification",
+								""
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Push Notification to Single User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"{{user_id}}\",\n  \"title\": \"Notification Title\",\n  \"body\": \"Notification message body\",\n  \"data\": {\n    \"type\": \"info\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/notification/send-push",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"notification",
+								"send-push"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Push Notification Endpoint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tokens\": [\"{{fcm_token}}\"],\n  \"title\": \"Push Notification\",\n  \"body\": \"This is a push notification\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/notification/send-push-endpoint",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"notification",
+								"send-push-endpoint"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Email to Single User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"{{user_id}}\",\n  \"subject\": \"Email Subject\",\n  \"body\": \"Email message body\",\n  \"template\": \"default\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/notification/send-email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"notification",
+								"send-email"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Push to All Users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Broadcast Notification\",\n  \"body\": \"This is a broadcast notification to all users\",\n  \"data\": {\n    \"type\": \"broadcast\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/notification/send-all-push",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"notification",
+								"send-all-push"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Email to All Users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subject\": \"Broadcast Email\",\n  \"body\": \"This is a broadcast email to all users\",\n  \"template\": \"broadcast\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/notification/send-all-email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"notification",
+								"send-all-email"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin Panel",
+			"item": [
+				{
+					"name": "Admin Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								""
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					}
+				},
+				{
+					"name": "Download Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/users/download",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"download"
+							]
+						}
+					}
+				},
+				{
+					"name": "Toggle User Block Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/users/{{user_id}}/block-toggle",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"{{user_id}}",
+								"block-toggle"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Drivers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/drivers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"drivers"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Independent Car Owners",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/independent-car-owners",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"independent-car-owners"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Transporters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/transporters",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"transporters"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Transporters Pending Verification",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/transporters_verification",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"transporters_verification"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Rickshaw and E-Rickshaw",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/rickshaw_e_rickshaw",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"rickshaw_e_rickshaw"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Single Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/dashboard/{{type}}/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"dashboard",
+								"{{type}}",
+								"{{id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Toggle Entity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"entity_id\": \"{{entity_id}}\",\n  \"entity_type\": \"driver\",\n  \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/toggle_entity",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"toggle_entity"
+							]
+						}
+					}
+				},
+				{
+					"name": "Toggle Vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"vehicle_id\": \"{{vehicle_id}}\",\n  \"status\": \"approved\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/toggle_vehicle",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"toggle_vehicle"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Role",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"moderator\",\n  \"permissions\": [\"read_users\", \"edit_users\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/roles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"roles"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Roles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/roles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"roles"
+							]
+						}
+					}
+				},
+				{
+					"name": "Edit Role",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"super_moderator\",\n  \"permissions\": [\"read_users\", \"edit_users\", \"delete_users\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/roles/{{role_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"roles",
+								"{{role_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Role",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/roles/{{role_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"roles",
+								"{{role_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Toggle User Role Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/roles/{{role_id}}/toggle-status/{{status}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"roles",
+								"{{role_id}}",
+								"toggle-status",
+								"{{status}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Plan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Premium Plan\",\n  \"price\": 999,\n  \"duration\": 30,\n  \"features\": [\"feature1\", \"feature2\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/plans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"plans"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Plans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/plans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"plans"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Plan by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/plans/{{plan_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"plans",
+								"{{plan_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Edit Plan",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Premium Plan\",\n  \"price\": 1199,\n  \"duration\": 30,\n  \"features\": [\"feature1\", \"feature2\", \"feature3\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/plans/{{plan_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"plans",
+								"{{plan_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Plan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/plans/{{plan_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"plans",
+								"{{plan_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Last 500 Transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/transactions/last500",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"transactions",
+								"last500"
+							]
+						}
+					}
+				},
+				{
+					"name": "Edit Registration Fee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category\": \"driver\",\n  \"fee\": 500\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/registration_fee",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"registration_fee"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Notifications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/notifications",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"notifications"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"System Notification\",\n  \"body\": \"This is a system notification from admin\",\n  \"target_users\": [\"all\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/notification",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"notification"
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/search-users?query=john&type=name",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"search-users"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "john"
+								},
+								{
+									"key": "type",
+									"value": "name"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Support",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/support",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"support"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Support",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"support@ridewithdriver.com\",\n  \"phone\": \"+91-9876543210\",\n  \"whatsapp\": \"+91-9876543210\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/support",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"support"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Legal Documents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/legal",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"legal"
+							]
+						}
+					}
+				},
+				{
+					"name": "Edit Legal Documents",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"content\": \"Updated legal document content\",\n  \"version\": \"1.1\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/legal/{{legal_id}}/version",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"legal",
+								"{{legal_id}}",
+								"version"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Content",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/content",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"content"
+							]
+						}
+					}
+				},
+				{
+					"name": "Edit Content",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"section\": \"homepage\",\n  \"content\": \"Updated homepage content\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/content",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"content"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Haversine Settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/haversine",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"haversine"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Haversine Settings",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category\": \"driver\",\n  \"distance\": 10\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/haversine",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"haversine"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Haversine Settings",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/haversine/{{category}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"haversine",
+								"{{category}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Registration Fee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category\": \"driver\",\n  \"fee\": 500,\n  \"description\": \"Driver registration fee\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/registration-fees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"registration-fees"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Registration Fees",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/registration-fees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"registration-fees"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Registration Fee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fee\": 600,\n  \"description\": \"Updated driver registration fee\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/registration-fees/{{fee_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"registration-fees",
+								"{{fee_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Registration Fee",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/registration-fees/{{fee_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"registration-fees",
+								"{{fee_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Subscription Plan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Premium Monthly\",\n  \"price\": 999,\n  \"duration\": 30,\n  \"features\": [\"unlimited_rides\", \"priority_support\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/subscription-plans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"subscription-plans"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Subscription Plans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/subscription-plans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"subscription-plans"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Subscription Plan",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Premium Monthly Updated\",\n  \"price\": 1199,\n  \"duration\": 30,\n  \"features\": [\"unlimited_rides\", \"priority_support\", \"free_cancellation\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/subscription-plans/{{plan_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"subscription-plans",
+								"{{plan_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Subscription Plan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/subscription-plans/{{plan_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"subscription-plans",
+								"{{plan_id}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "Initialize Plans and Fees",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"initialize_default_data\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/initialize-plans-and-fees",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"initialize-plans-and-fees"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Admin Push Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Admin Notification\",\n  \"body\": \"This is an admin notification\",\n  \"target_users\": [\"all\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/notification/admin/send-push",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"notification",
+								"admin",
+								"send-push"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Admin Email Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subject\": \"Admin Email\",\n  \"body\": \"This is an admin email notification\",\n  \"target_users\": [\"all\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user/notification/admin/send-email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"notification",
+								"admin",
+								"send-email"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:7",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "admin_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "service_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "conversation_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "participant_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "target_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "review_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "plan_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "order_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "payment_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "signature",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "vehicle_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "entity_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "role_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "legal_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "fee_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "category",
+			"value": "driver",
+			"type": "string"
+		},
+		{
+			"key": "type",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "status",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "pincode",
+			"value": "110001",
+			"type": "string"
+		},
+		{
+			"key": "fcm_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "webhook_signature",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
